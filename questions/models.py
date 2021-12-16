@@ -17,7 +17,7 @@ class Answer(models.Model):
     correct = models.BooleanField(default=False)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
-    point = models.IntegerField(default=1)
+    
     
 
     def __str__(self):
