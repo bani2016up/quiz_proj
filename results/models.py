@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 class Result(models.Model):
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='quiz')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     score = models.FloatField()
     

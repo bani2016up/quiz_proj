@@ -1,0 +1,10 @@
+<h2>Your results:</h2>
+
+{% for data in result %}
+    <hr>
+    <p> Quize -{{ data.quiz }}</p>
+    <p> Who - {{ data.user }}</p>
+    <p> Score - {{ data.score }}</p>
+    {% comment %} <p>Do test again - {{ data.quiz_link }}</p> {% endcomment %}
+
+{% endfor %}
