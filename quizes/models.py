@@ -1,13 +1,16 @@
 from django.db import models
 import random
 
-DIFF_CHOICES = (
+
+
+class Quiz(models.Model):
+    
+    DIFF_CHOICES = (
     ('easy', 'easy'),
     ('medium', 'medium'),
     ('hard', 'hard'),
-)
-
-class Quiz(models.Model):
+    )
+    
     name = models.CharField(max_length=120)
     topic = models.CharField(max_length=120)
     number_of_questions = models.IntegerField()
