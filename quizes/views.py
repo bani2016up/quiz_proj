@@ -16,14 +16,18 @@ def documrntationView(request):
     data ={}
     return render(request, 'quizes/documrntationView.html')
 
-
-def statistic(requst):
+@login_required(login_url='/login/')
+def statistic(request):
     users = get_user_model().objects.all()
     result = Result.objects.all()
     result_count = result.count()
+    
+
+        
+        
     data = {'allusers': users,
             'result_count':result_count}
-    return render(requst, 'quizes/statistic.html', data)
+    return render(request, 'quizes/statistic.html', data)
 
 @login_required(login_url='/login/')
 def resultView(request):   
@@ -61,7 +65,7 @@ def loginPage(request):
             messages.info(request, 'username or pssword is wrong')
     data = {}
     return render(request, 'quizes/login.html', data)
-
+@login_required(login_url='/login/')
 def logoutUser(request):
     logout(request)
     return redirect('/')
@@ -163,17 +167,10 @@ def createView(request):
             form.save()
             return redirect('/login/cabinet/create/quastion/')
     context ={'form': form}
-    return render(request, "quizescreateview.html", context)
+    return render(request, "createviews.html", context)
 
-@login_required(login_url='/login/')  
-def quastionscreateView(request):
-    form = AnswearForm()
-    if request.method == 'POST':
-        print('Posting....*', request.post)
-        form = QuizForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/#/')
-    context ={'form': form}
-    return render(request, "quizes/CRUD/quastionscreateview.html", context)
 
+@login_required(login_url='/login/') 
+def created(request):
+    data = {}
+    return render(request, 'quizes/created.html', data)
