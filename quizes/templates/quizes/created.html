@@ -1,2 +1,21 @@
 All good:</br>
+
+<p>
+    <form method="POST" action="">
+    
+        {% csrf_token %}
+        For text write down your question, and for Quiz select Quiz wich you have created:
+        {{ form2.as_p }}
+        <hr>
+        For text make an option of answear, one of them must bet marked as true, for question select the corent quastion.</br>
+        {{ form.as_p }}
+    </br><hr>
+        {{ form.as_p }}
+    </br><hr>
+        {{ form.as_p }}
+    </br><hr>
+        {{ form.as_p }}
+        <input type="submit" action="Submit">
+    </form>
+    </p>
 <a href='/login/cabinet'>Go back</a>

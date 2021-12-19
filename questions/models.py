@@ -5,6 +5,7 @@ class Question(models.Model):
     text = models.CharField(max_length=200)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
+    # points = models.IntegerField()
 
     def __str__(self):
         return str(self.text)

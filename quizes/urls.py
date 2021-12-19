@@ -10,19 +10,19 @@ from .views import (
     logoutUser,
     resultView,
     createView,
-    created,
     documrntationView,
     statistic,
     own_statistic,
+    creatQuastion,
 )
 
 app_name = 'quizes'
 
 urlpatterns = [
+    path('login/cabinet/create/<int:pk>/', creatQuastion, name='creatQuastion'),
     path('login/cabinet/ownstatic/', own_statistic, name='own_statistic'),
     path('login/cabinet/statistic/', statistic, name='statistic'),
     path('documentation/', documrntationView, name='doc'),
-    path('login/cabinet/create/created', created, name='created'),
     path('login/cabinet/create/', createView, name="createView"),
     path("login/cabinet/result/", resultView, name="result-View"),
     path('login/', loginPage, name='log-in-view'),

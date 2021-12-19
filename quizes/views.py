@@ -20,11 +20,7 @@ def documrntationView(request):
 def statistic(request):
     users = get_user_model().objects.all()
     result = Result.objects.all()
-    result_count = result.count()
-    
-
-        
-        
+    result_count = result.count()      
     data = {'allusers': users,
             'result_count':result_count}
     return render(request, 'quizes/statistic.html', data)
@@ -161,16 +157,28 @@ def createView(request):
     
     form = QuizForm()
     if request.method == 'POST':
-        print('Posting....*', request.post)
+        print('Posting....*', request.POST)
         form = QuizForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/login/cabinet/create/quastion/')
+            return redirect(f'/login/cabinet/create/{form.instance.pk}/')
     context ={'form': form}
-    return render(request, "createviews.html", context)
-
+    return render(request, "quizes/createviews.html", context)
 
 @login_required(login_url='/login/') 
-def created(request):
-    data = {}
-    return render(request, 'quizes/created.html', data)
+def creatQuastion(request, pk):
+    form = AnswearForm()
+    form2 = QuastionrForm()
+    if request.method == 'POST':
+        print('Posting....*', request.POST)
+        form = AnswearForm(request.POST)
+        form2 = QuastionrForm(request.POST)
+        if form.is_valid() and form2.is_valid():
+            form.save()
+            form2.save()
+            return redirect('/login/cabinet/')
+        
+    
+    context = {'pk' : pk, 'form': form, 'form2' : form2}
+    return render(request, "quizes/created.html", context)
+
