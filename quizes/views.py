@@ -161,6 +161,7 @@ def createView(request):
         form = QuizForm(request.POST)
         if form.is_valid():
             form.save()
+            
             return redirect(f'/login/cabinet/create/{form.instance.pk}/')
     context ={'form': form}
     return render(request, "quizes/createviews.html", context)
