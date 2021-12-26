@@ -1,4 +1,7 @@
 import django
+from django.db.models.query import QuerySet
+from django.db.models.sql.query import Query
+from django.http.request import QueryDict
 from django.shortcuts import render, redirect
 from .models import Quiz
 from django.views.generic import ListView
@@ -20,17 +23,16 @@ def documrntationView(request):
 def statistic(request):
     users = get_user_model().objects.all()
     result = Result.objects.all()
-    result_count = result.count()      
-    data = {'allusers': users,
-            'result_count':result_count}
-    return render(request, 'quizes/statistic.html', data)
-
-@login_required(login_url='/login/')
-def resultView(request):   
+    result_count = result.count()   
     user_get_id = request.user
-    user_id = user_get_id.id
-    data = Result.objects.filter(user__pk=user_id)    
-    return render(request, 'quizes/resultview.html', {'result' : data})
+    user_id = user_get_id.id 
+    user_data =   Result.objects.filter(user__pk=user_id)   
+    data = {'allusers': users,
+            'result_count':result_count,
+            'result': user_data
+            }    
+    return render(request, 'quizes/statistic.html', data)   
+
 
 @login_required(login_url='/login/')
 def own_statistic(request):
@@ -183,3 +185,17 @@ def creatQuastion(request, pk):
     context = {'pk' : pk, 'form': form, 'form2' : form2}
     return render(request, "quizes/created.html", context)
 
+# class SearchView(ListView):
+#     model = Quiz
+#     template_name = 'quizes/search.html'
+#     context_object_name = 'all_search_results'
+
+#     def get_queryset(self):
+#         search = super(SearchView, self).get_queryset()
+#         query = self.request.GET.get('search')
+#         if query:
+#             postresult = Quiz.objects.filter(title__contains=query)
+#             search = postresult
+#         else:
+#             search = None
+#         return search

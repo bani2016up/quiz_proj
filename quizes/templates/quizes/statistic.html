@@ -18,10 +18,10 @@
       <p>see best palyers <a href='#'>here</a></p>
       <hr>
     
-    {% for data in allusers %}
+    {% for i in allusers %}
     
-      <p> user -  {{ data.get_username }}</p>
-      <p> amount of done tests - {{ result_count }}
+      <p> user -  {{ i.get_username }}</p>
+      <p> amount of done tests - {{ i.results.count }}
         <hr>
     {% endfor %}
 

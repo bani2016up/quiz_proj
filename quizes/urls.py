@@ -8,23 +8,23 @@ from .views import (
     quiz_data_view,
     save_quiz_view,
     logoutUser,
-    resultView,
     createView,
     documrntationView,
     statistic,
     own_statistic,
     creatQuastion,
+    # SearchView
 )
 
 app_name = 'quizes'
 
 urlpatterns = [
+    # path('search/', SearchView.as_view(), name='search/'),
     path('login/cabinet/create/<int:pk>/', creatQuastion, name='creatQuastion'),
     path('login/cabinet/ownstatic/', own_statistic, name='own_statistic'),
     path('login/cabinet/statistic/', statistic, name='statistic'),
     path('documentation/', documrntationView, name='doc'),
     path('login/cabinet/create/', createView, name="createView"),
-    path("login/cabinet/result/", resultView, name="result-View"),
     path('login/', loginPage, name='log-in-view'),
     path("sightup/", sightup, name="sightup-view"),
     path('login/cabinet/', cabinet, name='cabinet-view'),

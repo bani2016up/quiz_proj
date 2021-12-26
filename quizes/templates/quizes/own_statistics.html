@@ -13,6 +13,15 @@
   <body>
     <h1>Here is your staticstic</h1>
    <p>amount of test done - {{ result_count }}</p>
+   <p>
+   {% for i in user_data %}
+    <hr>
+    <p> Quize -{{ i.quiz }}</p>
+    <p> Who - {{ i.user }}</p>
+    <p> Score - {{ i.score }}</p>
+    {% comment %} <p>Do test again - {{ data.quiz_link }}</p> {% endcomment %}
+
+{% endfor %}</p>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
