@@ -1,13 +1,15 @@
 {% extends "quizes/main.html" %}
-
+{% load static %}
 {% block content %}
+<h3><a href='/' calss='btn-link modal-button'>go back</a></h3>
     <center>
+        
         {% if searched %} 
        <h1>You look for {{ searched }}.</h1>
        <hr></br>
 
        {% for i in quiz %}
-            <a href='/{{ i.id }}'>{{ i.name }}</a><br>
+            <h4><a href='/{{ i.id }}' calss='btn-link modal-button'>{{ i.name }}</a></h4><br>
        {% endfor %}
         {% else %}
         <h1>Nothig to search.</h1>

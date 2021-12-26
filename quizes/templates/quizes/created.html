@@ -6,7 +6,7 @@ All good:</br>
         {% csrf_token %}
         For text write down your question, and for Quiz select Quiz wich you have created:
         {{ form2.as_p }}
-        <hr>
+        {% comment %} <hr>
         For text make an option of answear, one of them must bet marked as true, for question select the corent quastion.</br>
         {{ form.as_p }}
     </br><hr>
@@ -14,8 +14,8 @@ All good:</br>
     </br><hr>
         {{ form.as_p }}
     </br><hr>
-        {{ form.as_p }}
-        <input type="submit" action="Submit">
+        {{ form.as_p }} {% endcomment %}
+        <input type="submit" action="submit">
     </form>
     </p>
 <a href='/login/cabinet'>Go back</a>
