@@ -13,13 +13,13 @@ from .views import (
     statistic,
     own_statistic,
     creatQuastion,
-    # SearchView
+    SearchView,
 )
 
 app_name = 'quizes'
 
 urlpatterns = [
-    # path('search/', SearchView.as_view(), name='search/'),
+    path('search/', SearchView, name='SearchForSmt'),
     path('login/cabinet/create/<int:pk>/', creatQuastion, name='creatQuastion'),
     path('login/cabinet/ownstatic/', own_statistic, name='own_statistic'),
     path('login/cabinet/statistic/', statistic, name='statistic'),

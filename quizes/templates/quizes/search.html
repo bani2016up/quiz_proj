@@ -1,20 +1,16 @@
 {% extends "quizes/main.html" %}
 
 {% block content %}
-    {% for quiz in all_search_results %}
-    <button
-        class="btn btn-link modal-button"
-        data-pk="{{obj.pk}}"
-        data-quiz="{{obj.name}}"
-        data-questions="{{obj.number_of_questions}}"
-        data-difficulty="{{obj.difficluty}}"
-        data-time="{{obj.time}}"
-        data-pass = "{{obj.required_score_to_pass}}"
-        data-toggle="modal"
-        data-target="#quizStartModal">
-        {{obj.name}}
-    </button><br>
-    {% empty %}
-        <h2>No results found</h2>
-    {% endfor %}
+    <center>
+        {% if searched %} 
+       <h1>You look for {{ searched }}.</h1>
+       <hr></br>
+
+       {% for i in quiz %}
+            <a href='/{{ i.id }}'>{{ i.name }}</a><br>
+       {% endfor %}
+        {% else %}
+        <h1>Nothig to search.</h1>
+       {% endif %}
+    </center>
 {% endblock %}

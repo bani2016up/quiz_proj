@@ -185,17 +185,15 @@ def creatQuastion(request, pk):
     context = {'pk' : pk, 'form': form, 'form2' : form2}
     return render(request, "quizes/created.html", context)
 
-# class SearchView(ListView):
-#     model = Quiz
-#     template_name = 'quizes/search.html'
-#     context_object_name = 'all_search_results'
-
-#     def get_queryset(self):
-#         search = super(SearchView, self).get_queryset()
-#         query = self.request.GET.get('search')
-#         if query:
-#             postresult = Quiz.objects.filter(title__contains=query)
-#             search = postresult
-#         else:
-#             search = None
-#         return search
+def SearchView(request):
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        quiz = Quiz.objects.filter(name__contains=searched)
+        context={
+            'searched': searched,
+            'quiz': quiz,
+                 }
+        return render(request, "quizes/search.html", context )
+    else:
+        context={}
+        return render(request, "quizes/search.html", context )
