@@ -10,7 +10,7 @@ charset-normalizer==2.0.8
 colorama==0.4.4
 constantly==15.1.0
 cryptography==36.0.0        
-daphne==3.0.2 
+daphne==3.0.2
 Django==3.2.10
 django-3-jet==1.0.7
 django-ckeditor==6.2.0      
