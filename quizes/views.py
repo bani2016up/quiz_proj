@@ -15,82 +15,83 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 
 
-def documrntationView(request):
+def documrntationView(request): #Web site help page
     data ={}
-    return render(request, 'quizes/documrntationView.html')
+    return render(request, 'quizes/documrntationView.html')# render
 
-@login_required(login_url='/login/')
-def statistic(request):
-    users = get_user_model().objects.all()
-    result = Result.objects.all()
-    result_count = result.count()   
-    user_get_id = request.user
-    user_id = user_get_id.id 
-    user_data =   Result.objects.filter(user__pk=user_id)   
+@login_required(login_url='/login/') #log in needed 
+def statistic(request):# all users stat
+    users = get_user_model().objects.all()# get all users
+    result = Result.objects.all()# get all results models
+    result_count = result.count() # count results  
+    user_get_id = request.user # get user
+    user_id = user_get_id.id # get user id
+    user_data =   Result.objects.filter(user__pk=user_id)   # filter requast
     data = {'allusers': users,
             'result_count':result_count,
             'result': user_data
             }    
-    return render(request, 'quizes/statistic.html', data)   
+    return render(request, 'quizes/statistic.html', data)   #render
 
 
-@login_required(login_url='/login/')
-def own_statistic(request):
-    user_get_id = request.user
-    user_id = user_get_id.id
-    result = Result.objects.filter(user__pk=user_id)
-    result_count = result.count()
+@login_required(login_url='/login/') #log in needed
+def own_statistic(request):# own statistics
+    user_get_id = request.user# get user
+    user_id = user_get_id.id# get user id
+    result = Result.objects.filter(user__pk=user_id)# compare user and pk
+    result_count = result.count()# count
     
     
     data = {'result_count' : result_count}
-    return render(request, 'quizes/own_statistics.html', data)
+    return render(request, 'quizes/own_statistics.html', data)# render
 
-@login_required(login_url='/login/')
-def cabinet(request):
+@login_required(login_url='/login/') #log in needed
+def cabinet(request):#own cabinet(accaut)
     data ={}
-    return render(request, 'quizes/cabinet.html', data)
+    return render(request, 'quizes/cabinet.html', data)#render
 
-def loginPage(request):
+def loginPage(request):# log in page( page to log in)
     if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
+        username = request.POST.get('username')# requast user
+        password = request.POST.get('password')# request users password
+        user = authenticate(request, username=username, password=password)# compare with db
         
         if user is not None:
-            login(request, user)
-            return redirect('/login/cabinet/')
+            login(request, user)# make user loged in
+            return redirect('/login/cabinet/')# redirect
         else:
-            messages.info(request, 'username or pssword is wrong')
+            messages.info(request, 'username or pssword is wrong')# retirn erro
     data = {}
-    return render(request, 'quizes/login.html', data)
-@login_required(login_url='/login/')
-def logoutUser(request):
-    logout(request)
-    return redirect('/')
+    return render(request, 'quizes/login.html', data)# render
 
-def sightup(request):
-    form = UserCreationForm()
+@login_required(login_url='/login/') #log in needed
+def logoutUser(request):# log out user
+    logout(request)# log out
+    return redirect('/') # redirect to main page
+
+def sightup(request):# sight up page
+    form = UserCreationForm()# use defult django form
     if request.method == "POST":
         form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Acount was created' + user)
-            return redirect('/login/')
+        if form.is_valid():# make sure all good)
+            form.save()# if yes - save
+            user = form.cleaned_data.get('username')# get user name
+            messages.success(request, 'Acount was created' + user) # return massge
+            return redirect('/login/')# redirect
         
         
     data = {'form': form}
-    return render(request, 'quizes/sightup.html', data)
+    return render(request, 'quizes/sightup.html', data)# render
 
-class QuizListView(ListView):
+class QuizListView(ListView):# quiz view
     model = Quiz 
-    template_name = 'quizes/main.html'
+    template_name = 'quizes/main.html'# get template
     
-@login_required(login_url='/login/')
-def quiz_view(request, pk):
-    quiz = Quiz.objects.get(pk=pk)
-    return render(request, 'quizes/quiz.html', {'obj': quiz})
-@login_required(login_url='/login/')
+@login_required(login_url='/login/') #log in needed
+def quiz_view(request, pk):# show quizes
+    quiz = Quiz.objects.get(pk=pk)#get quiz pk
+    return render(request, 'quizes/quiz.html', {'obj': quiz})# render
+@login_required(login_url='/login/') #log in needed
 def quiz_data_view(request, pk):
     quiz = Quiz.objects.get(pk=pk)
     questions = []
@@ -103,8 +104,8 @@ def quiz_data_view(request, pk):
         'data': questions,
         'time': quiz.time,
     })
-@login_required(login_url='/login/')
-def save_quiz_view(request, pk):
+@login_required(login_url='/login/') #log in needed
+def save_quiz_view(request, pk):# save quizes
     if request.is_ajax():
         questions = []
         data = request.POST
@@ -154,8 +155,8 @@ def save_quiz_view(request, pk):
         else:
             return JsonResponse({'passed': False, 'score': score_, 'results': results})
         
-@login_required(login_url='/login/')    
-def createView(request):
+@login_required(login_url='/login/') #log in needed    
+def createView(request): # create quize(works)
     
     form = QuizForm()
     if request.method == 'POST':
@@ -166,10 +167,10 @@ def createView(request):
             
             return redirect(f'/login/cabinet/create/{form.instance.pk}/')
     context ={'form': form}
-    return render(request, "quizes/createviews.html", context)
+    return render(request, "quizes/createviews.html", context)# render
 
-@login_required(login_url='/login/') 
-def creatQuastion(request, pk):
+@login_required(login_url='/login/') #log in needed 
+def creatQuastion(request, pk):# create quastions
     form = AnswearForm()
     form2 = QuastionrForm()
     if request.method == 'POST':
@@ -179,13 +180,13 @@ def creatQuastion(request, pk):
         if form.is_valid() and form2.is_valid():
             form.save()
             form2.save()
-            return redirect('/login/cabinet/')
+            return redirect('/login/cabinet/')# render
         
     
     context = {'pk' : pk, 'form': form, 'form2' : form2}
     return render(request, "quizes/created.html", context)
 
-def SearchView(request):
+def SearchView(request): # search view
     if request.method == 'POST':
         searched = request.POST['searched']
         quiz = Quiz.objects.filter(name__contains=searched)
@@ -193,7 +194,7 @@ def SearchView(request):
             'searched': searched,
             'quiz': quiz,
                  }
-        return render(request, "quizes/search.html", context )
+        return render(request, "quizes/search.html", context )# render
     else:
         context={}
-        return render(request, "quizes/search.html", context )
+        return render(request, "quizes/search.html", context )# render

@@ -3,20 +3,20 @@ import random
 
 
 
-class Quiz(models.Model):
+class Quiz(models.Model): # Quiz model
     
-    DIFF_CHOICES = (
+    DIFF_CHOICES = ( # options
     ('easy', 'easy'),
     ('medium', 'medium'),
     ('hard', 'hard'),
     )
     
-    name = models.CharField(max_length=120)
-    topic = models.CharField(max_length=120)
-    number_of_questions = models.IntegerField()
-    time = models.IntegerField(help_text="duration of the quiz in minutes")
-    required_score_to_pass = models.IntegerField(help_text="required score in %")
-    difficluty = models.CharField(max_length=6, choices=DIFF_CHOICES)
+    name = models.CharField(max_length=120)#title
+    topic = models.CharField(max_length=120)#what is this thimg about
+    number_of_questions = models.IntegerField()#amout of quastins int the quiz
+    time = models.IntegerField(help_text="duration of the quiz in minutes")#amout of time given to solve quiz
+    required_score_to_pass = models.IntegerField(help_text="required score in %")#required score to pass
+    difficluty = models.CharField(max_length=6, choices=DIFF_CHOICES)#uses DIFF_CHOICES
 
     def __str__(self):
         return f"{self.name}-{self.topic}"
