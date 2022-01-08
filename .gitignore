@@ -2,21 +2,10 @@
 /venv/  
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# compiled output
-main/frontend/dist
-main/frontend/tmp
-main/frontend/out-tsc
-# Only exists if Bazel was run
-main/frontend/bazel-out
-
-# dependencies
-main/frontend/node_modules
-
 # profiling files
 chrome-profiler-events*.json
 
 # IDEs and editors
-main/frontend/.idea
 .project
 .classpath
 .c9/
@@ -32,17 +21,10 @@ main/frontend/.idea
 !.vscode/extensions.json
 .history/*
 
-# misc
-main/frontend/.angular/cache
-main/frontend/.sass-cache
-main/frontend/connect.lock
-main/frontend/coverage
-main/frontend/libpeerconnection.log
-npm-debug.log
-yarn-error.log
-testem.log
-main/frontend/typings
 
 # System Files
 .DS_Store
 Thumbs.db
+
+#venv
+.venv
